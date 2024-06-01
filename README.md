@@ -15,7 +15,7 @@ This application allows you to upload a PDF, create a searchable database, and a
 
 1. **Clone the repository:**
     ```sh
-    git clone repository_url](https://github.com/qalmaqihir/RAG_ML_Task/tree/main)
+    git clone https://github.com/qalmaqihir/RAG_ML_Task/tree/main
     cd ML_Task
     ```
 - Create a .env and put your `OPENAI_API_KEY`.
