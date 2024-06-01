@@ -159,7 +159,7 @@ OPENAI_API_KEY=your_openai_api_key_here
 - **Advanced Querying:** Implement more advanced querying capabilities, such as keyword highlighting and context expansion.
 
 ## Authors
-- [Jawad Haider]
+- Jawad Haider
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
