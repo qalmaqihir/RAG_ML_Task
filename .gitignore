@@ -1,0 +1,73 @@
+# Exclude .env file
+.env
+
+# Exclude virtual environment directories
+venv/
+env/
+.venv/
+.venv
+ENV/
+env.bak/
+venv.bak/
+ENV.bak/
+
+# Exclude Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyo
+
+# Exclude Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Exclude system files
+.DS_Store
+Thumbs.db
+
+# Exclude editor/IDE files
+.vscode/
+.idea/
+
+# Exclude log files
+*.log
+
+# Exclude compiled binary files
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Exclude coverage reports
+htmlcov/
+.coverage
+.tox/
+.nox/
+.cache/
+
+# Exclude distribution/build files
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Exclude project-specific settings
+*.iml
+*.ipr
+*.iws
+
