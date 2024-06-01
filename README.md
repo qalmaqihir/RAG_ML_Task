@@ -2,6 +2,9 @@
 
 This application allows you to upload a PDF, create a searchable database, and ask questions about the content of the PDF. The solution is implemented using FastAPI for the backend, Streamlit for the frontend, and containerized using Docker.
 
+![GIF](./working.gif)
+
+
 ## Features
 - Upload a PDF and create a new searchable database.
 - Update the existing database with new PDF content.
