@@ -164,15 +164,5 @@ OPENAI_API_KEY=your_openai_api_key_here
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
----
-
-This README file provides detailed instructions on how to set up, run, and use the PDF Question Answering App, along with technical details, challenges faced, solutions implemented, and future improvements. If you need further assistance or have any questions, feel free to ask!
-
-
-
-----------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------
-					                                      README.md 
-----------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 
