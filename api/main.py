@@ -1,9 +1,9 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 import uvicorn
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-# from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAI
@@ -61,8 +61,11 @@ async def update_db(file: UploadFile = File(...)):
     
     return {"message": "Database updated with new documents."}
 
+class QueryModel(BaseModel):
+    question: str
+
 @app.post("/query/")
-async def query(question: str):
+async def query(query: QueryModel):
     global db
     if db is None:
         raise HTTPException(status_code=400, detail="Database is not initialized.")
@@ -103,20 +106,27 @@ async def query(question: str):
         response = llm.invoke(guardrails_prompt.format(question=question))
         return response
 
-    guardrails_result = check_guardrails(question)
+    guardrails_result = check_guardrails(query.question)
 
     if "Inappropriate" in guardrails_result:
         return JSONResponse(content={"answer": "The question contains inappropriate content and cannot be answered."}, status_code=400)
     elif "Irrelevant" in guardrails_result:
         return JSONResponse(content={"answer": "The question is not relevant to the content of the documents."}, status_code=400)
     
-    results = retriever_chain.invoke({"input": question})
+    results = retriever_chain.invoke({"input": query.question})
     
     if "not applicable" in results['answer']:
         return JSONResponse(content={"answer": "The question is not relevant to the content of the documents."}, status_code=400)
     
     # Return JSON response directly
-    return JSONResponse(content=results)
+    # return JSONResponse(content=results)
+    best_paragraph = results['context'][0].page_content
+    doc_name = results['context'][0].metadata['source']
+    doc_page = results['context'][0].metadata.get('page', 'unknown')
+    answer = results['answer']
+    response = f"{answer}\n\n\t{'--'*10} :Source & Page: {'--'*10}\n{doc_name}, Page  {doc_page},\n\n\t{'--'*10} :Best Paragraph: {'--'*10}\n{best_paragraph}"
+    
+    return {"answer": response}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
